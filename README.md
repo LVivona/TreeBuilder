@@ -1,5 +1,5 @@
 
-# README Tree Builder
+# React-Flow Tree Builder
 
 ### Table of Contents
 * [How To Run](https://github.com/LVivona/TreeBuilder/blob/main/README.md#how-to-run)
