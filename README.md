@@ -72,6 +72,9 @@
 
     ] }
 ```
+### Visual Example 
+![alt text](https://github.com/LVivona/TreeBuilder/blob/dc33393960b78355657d781890089b1da1b685a9/example.png)
+
 ## Converted Data
 
 ### Node
