@@ -2,7 +2,9 @@
 # README Tree Builder
 
 ### Table of Contents
-* [How To Run](https://github.com/LVivona/Libp2p-pubsub-gui#how-to-run)
+* [How To Run](https://github.com/LVivona/TreeBuilder/blob/main/README.md#how-to-run)
+* [Data Format](https://github.com/LVivona/TreeBuilder/blob/main/README.md#Data-Format)
+* [External Library](https://github.com/LVivona/TreeBuilder/blob/main/README.md#External-Library)
 
 ## How To Run
   This is a simple npx create-react-app so ``npm start`` will run the code; but if you do clone then please **NOTE** it's a older version of react so there is vulnerability so do not use this model for final development. I do just suggest copying the tree.js located **src/tools/build/\*\*.js** as that file does more of the heavy lifting in both creating the information for React-flow to render. 
