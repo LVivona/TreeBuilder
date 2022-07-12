@@ -74,7 +74,48 @@ export const dataTree = [
     ] }
 ]
 
-export const x = {'value': {'id': 'A', 'type': 'dir'}, 'children': [{'value': {'id': 'C', 'type': 'dir', 'parentId': 'A'}, 'children': [{'value': {'id': 'C.txt', 'type': 'txt', 'parentId': 'C'}, 'children': []}, {'value': {'id': 'C.json', 'type': 'json', 'parentId': 'C'}, 'children': []}]}, {'value': {'id': 'B', 'type': 'dir', 'parentId': 'A'}, 'children': [{'value': {'id': 'D', 'type': 'dir', 'parentId': 'B'}, 'children': [{'value': {'id': 'D.yaml', 'type': 'yaml', 'parentId': 'D'}, 'children': []}]}, {'value': {'id': 'B.txt', 'type': 'txt', 'parentId': 'B'}, 'children': []}]}, {'value': {'id': 'A.txt', 'type': 'txt', 'parentId': 'A'}, 'children': []}]}
+export const x = {'value': {
+                    'id': 'A', 'type': 'dir'
+                    }, 
+                  'children': [
+                    {'value': {
+                      'id': 'C', 'type': 'dir', 'parentId': 'A'
+                      }, 
+                      'children': [
+                        {'value': {
+                          'id': 'C.txt', 'type': 'txt', 'parentId': 'C'
+                          },
+                          'children': []
+                        },
+                        {'value': {
+                          'id': 'C.json', 'type': 'json', 'parentId': 'C'
+                          },
+                        'children': []}
+                        ]},
+                      {'value': {
+                        'id': 'B', 'type': 'dir', 'parentId': 'A'
+                        }, 
+                      'children': [
+                        {'value': {
+                          'id': 'D', 'type': 'dir', 'parentId': 'B'
+                          },
+                          'children': [
+                            {'value': {
+                              'id': 'D.yaml', 'type': 'yaml', 'parentId': 'D'
+                              },
+                              'children': []
+                            }]},
+                            {'value': {
+                              'id': 'B.txt', 'type': 'txt', 'parentId': 'B'
+                            },
+                            'children': []}
+                        ]
+                      },
+                      {'value': {'id': 'A.txt', 'type': 'txt', 'parentId': 'A'},
+                      'children': []
+                      }
+                    ]
+                  }
 
 export const initialNodes = [
     {
