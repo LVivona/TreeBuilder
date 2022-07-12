@@ -1,3 +1,5 @@
+import '../../css/dist/output.css'
+
 export let root = {
     value: "A",
     children: [
@@ -6,6 +8,36 @@ export let root = {
             children: [
                 {
                     value: "C",
+                    children: [{
+                        value: "L",
+                        children: []
+                    },
+                    {
+                        value: "M",
+                        children: []
+                    }]
+                },
+                {
+                    value: "P",
+                    children: [                {
+                        value: "T",
+                        children: []
+                    },
+                    {
+                        value: "U",
+                        children: []
+                    },
+                    {
+                        value: "V",
+                        children: []
+                    }]
+                },
+                {
+                    value: "Q",
+                    children: []
+                },
+                {
+                    value: "W",
                     children: []
                 }
             ]
@@ -15,10 +47,25 @@ export let root = {
             children: [
                 {
                     value: "F",
-                    children: []
+                    children: [{
+                        value: "N",
+                        children: []
+                    },
+                    {
+                        value: "O",
+                        children: []
+                    }]
                 },
                 {
                     value: "G",
+                    children: []
+                },
+                {
+                    value: "R",
+                    children: []
+                },
+                {
+                    value: "S",
                     children: []
                 }
             ]
@@ -58,6 +105,7 @@ class TreeNode {
             prevSibling : null,
             children : [] 
         }
+        this.hidden = false;
         this.position = {x : 0 , y : 0 }
 
     }
@@ -103,8 +151,8 @@ export class TreeRender {
         stack.push(root);
 
         const visitNode = (node, hashMap, array) => {
-            if(!hashMap[node.data.label]){
-                hashMap[node.data.label] = true;
+            if(!hashMap[node.data.label.id]){
+                hashMap[node.data.label.id] = true;
                 node.position.x = node.data.final 
                 array.push(node)
             }
@@ -120,8 +168,6 @@ export class TreeRender {
                 }
             }
         }
-        console.log(nodes)
-        console.log(edges)
         return {nodes, edges}
     }
 
@@ -134,7 +180,7 @@ export class TreeRender {
             treeNode.data.children.push(
                 this.prepareData(
                     node.children[i],
-                    level + 500,
+                    level + 400,
                     i >= 1 ? treeNode.data.children[i - 1] : null
                 )
             );
@@ -148,7 +194,7 @@ export class TreeRender {
         }
 
         if (node.data.prevSibling) {
-            node.position.x = node.data.prevSibling.position.x + 200;
+            node.position.x = node.data.prevSibling.position.x + 250;
         } else {
             node.position.x = 0;
         }
@@ -207,10 +253,13 @@ export class TreeRender {
      buildEdge = (parent, child) => {
         return {
            id : `e-${parent.id}-${child.id}`,
+           class : ' animate-FadeMeOut', 
            source : parent.id,
            target : child.id,
            animated: true,
-           style: { stroke: 'black' },
+           type : "custom",
+           style: { strokeWidth : "7px"},
+
         }
      }
 }

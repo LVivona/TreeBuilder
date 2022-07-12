@@ -1,70 +1,117 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React-Flow Tree Builder
 
-## Available Scripts
+### Table of Contents
+* [How To Run](https://github.com/LVivona/TreeBuilder/blob/main/README.md#how-to-run)
+* [Data Format](https://github.com/LVivona/TreeBuilder/blob/main/README.md#Data-Format)
+* [External Library](https://github.com/LVivona/TreeBuilder/blob/main/README.md#External-Library)
 
-In the project directory, you can run:
+## How To Run
+  This is a simple npx create-react-app so ``npm start`` will run the code; but if you do clone then please **NOTE** it's a older version of react so there is vulnerability so do not use this model for final development. I do just suggest copying the tree.js located **src/tools/build/\*\*.js** as that file does more of the heavy lifting in both creating the information for React-flow to render. 
+ 
+## Data-Format
+```python
+import os
+dir = [{"value" : { "id" : "A", "type" : "dir"}, "children" : None}]
+for dirname, dirnames, filenames in os.walk('./A'):
+        for currentdir in dirnames:
+            dir.append({"value" : { "id" : currentdir, "type" : "dir", "parentId" : dirname.split("/")[-1]}, "children" : None})
 
-### `npm start`
+        for files in filenames:
+            dir.append({"value" : { "id" : files, "type" : files.split(".")[-1], "parentId" : dirname.split("/")[-1]}, "children" : None})
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+map, node, roots = {}, None, []
 
-### `npm test`
+for idx, i in enumerate(dir):
+    map[i["value"]["id"]] = idx
+    i["children"] = []
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+for i in dir:
+    node = i
+    if "parentId" in node["value"]:
+        dir[map[node["value"]["parentId"]]]["children"].append(node)
+    else:
+        roots.append(node)
 
-### `npm run build`
+print(roots)
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+ {'value': {
+                    'id': 'A', 'type': 'dir'
+                    }, 
+                  'children': [
+                    {'value': {
+                      'id': 'C', 'type': 'dir', 'parentId': 'A'
+                      }, 
+                      'children': [
+                        {'value': {
+                          'id': 'C.txt', 'type': 'txt', 'parentId': 'C'
+                          },
+                          'children': []
+                        },
+                        {'value': {
+                          'id': 'C.json', 'type': 'json', 'parentId': 'C'
+                          },
+                        'children': []}
+                        ]},
+                      {'value': {
+                        'id': 'B', 'type': 'dir', 'parentId': 'A'
+                        }, 
+                      'children': [
+                        {'value': {
+                          'id': 'D', 'type': 'dir', 'parentId': 'B'
+                          },
+                          'children': [
+                            {'value': {
+                              'id': 'D.yaml', 'type': 'yaml', 'parentId': 'D'
+                              },
+                              'children': []
+                            }]},
+                            {'value': {
+                              'id': 'B.txt', 'type': 'txt', 'parentId': 'B'
+                            },
+                            'children': []}
+                        ]
+                      },
+                      {'value': {'id': 'A.txt', 'type': 'txt', 'parentId': 'A'},
+                      'children': []
+                      }
+                    ]
+                  }
+```
+### Visual Example 
+![alt text](https://github.com/LVivona/TreeBuilder/blob/dc33393960b78355657d781890089b1da1b685a9/example.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Converted Data
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Node
+```
+[
+  { id       : ...,
+    type     : ...,
+    data     : { ..., ... },
+    position : { x : ..., y : ...},
+  },
+  ...
+]
+```
 
-### `npm run eject`
+### Edge
+```
+[
+ {  id       : ...,
+    source   : parent.id,
+    target   : child.id,
+    animated : true,
+    style    : { ... } 
+  },
+]
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+You can really put any information withing **value** in the tree you can put a whole new object it's really up to you, and with that you can access that info custom node with React-Flow given if you need to.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## External Library
+* React Flow [https://reactflow.dev/]

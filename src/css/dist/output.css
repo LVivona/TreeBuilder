@@ -556,6 +556,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.hidden {
+  display: none;
+}
+
 .h-40 {
   height: 10rem;
 }
@@ -580,6 +584,31 @@ video {
   width: 100%;
 }
 
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-FadeMeOut {
+  -webkit-animation: fade-in ease 2s;
+          animation: fade-in ease 2s;
+}
+
 .rounded-md {
   border-radius: 0.375rem;
 }
@@ -598,14 +627,55 @@ video {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
+.bg-zinc-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+}
+
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
+.bg-Retro-light-pink {
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 1 157 / var(--tw-bg-opacity));
+}
+
 .bg-neutral-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(38 38 38 / var(--tw-bg-opacity));
+}
+
+.bg-Matriax8C-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 240 220 / var(--tw-bg-opacity));
+}
+
+.bg-Matriax8C-yellow {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 200 0 / var(--tw-bg-opacity));
+}
+
+.bg-Matriax8C-green {
+  --tw-bg-opacity: 1;
+  background-color: rgb(16 200 64 / var(--tw-bg-opacity));
+}
+
+.from-Retro-light-blue {
+  --tw-gradient-from: #2de2e6;
+  --tw-gradient-to: rgb(45 226 230 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-Retro-light-pink {
+  --tw-gradient-from: #f6019d;
+  --tw-gradient-to: rgb(246 1 157 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-Retro-purple {
+  --tw-gradient-to: #9700cc;
 }
 
 .px-1 {
@@ -655,13 +725,16 @@ video {
           filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.duration-200 {
-  transition-duration: 200ms;
+.duration-300 {
+  transition-duration: 300ms;
 }
 
-.hover\:bg-green-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
+.hover\:bg-gradient-to-bl:hover {
+  background-image: linear-gradient(to bottom left, var(--tw-gradient-stops));
+}
+
+.hover\:stroke-Retro-light-blue:hover {
+  stroke: #2de2e6;
 }
 
 .hover\:blur-none:hover {
