@@ -14,7 +14,6 @@ function Flow() {
   const [nodes, setNodes, onNodesChange] = useNodesState(data.nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(data.edges);
   const [children, setChildren] = useState({})
-  console.log(rendered)
   const onNodeClick = (event, node) => {
     setChildren(children_id(node)) 
     }
