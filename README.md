@@ -10,67 +10,76 @@
   This is a simple npx create-react-app so ``npm start`` will run the code; but if you do clone then please **NOTE** it's a older version of react so there is vulnerability so do not use this model for final development. I do just suggest copying the tree.js located **src/tools/build/\*\*.js** as that file does more of the heavy lifting in both creating the information for React-flow to render. 
  
 ## Data-Format
-```
- { value : "root",
-    children : [
-      {
-        value : "first child",
-        children :[
-          {
-            value : "first child of first child",
-            children : []
-          },
-          {
-            value : "second child of first child",
-            children : [
-              {
-                value : "first child of first's, second child",
-                children : []
-              },
-              {
-                value : "second child of first's, second child",
-                children : []
-              }
-            ]
-          },
-          {
-            value : "third child of first child",
-            children : [{
-              value : "first child of first's, third child",
-              children : []
-            }]
-          }
-        ],
-      },
-      {
-        value : "second child",
-        children : [
-          {
-            value : "first child of second child",
-            children : []
-          },
-          {
-            value : "second child of second child",
-            children : [
-              {
-                value : "first child of second's, second child",
-                children : []
-              }
-            ]
-          },
-          {
-            value : "third child of second child",
-            children : [
-              {
-                value : "first child of second's, third child",
-                children : []
-              }
-            ]
-          }
-        ]
-      }
+```python
+import os
+dir = [{"value" : { "id" : "A", "type" : "dir"}, "children" : None}]
+for dirname, dirnames, filenames in os.walk('./A'):
+        for currentdir in dirnames:
+            dir.append({"value" : { "id" : currentdir, "type" : "dir", "parentId" : dirname.split("/")[-1]}, "children" : None})
 
-    ] }
+        for files in filenames:
+            dir.append({"value" : { "id" : files, "type" : files.split(".")[-1], "parentId" : dirname.split("/")[-1]}, "children" : None})
+
+
+map, node, roots = {}, None, []
+
+for idx, i in enumerate(dir):
+    map[i["value"]["id"]] = idx
+    i["children"] = []
+
+for i in dir:
+    node = i
+    if "parentId" in node["value"]:
+        dir[map[node["value"]["parentId"]]]["children"].append(node)
+    else:
+        roots.append(node)
+
+print(roots)
+```
+
+```
+ {'value': {
+                    'id': 'A', 'type': 'dir'
+                    }, 
+                  'children': [
+                    {'value': {
+                      'id': 'C', 'type': 'dir', 'parentId': 'A'
+                      }, 
+                      'children': [
+                        {'value': {
+                          'id': 'C.txt', 'type': 'txt', 'parentId': 'C'
+                          },
+                          'children': []
+                        },
+                        {'value': {
+                          'id': 'C.json', 'type': 'json', 'parentId': 'C'
+                          },
+                        'children': []}
+                        ]},
+                      {'value': {
+                        'id': 'B', 'type': 'dir', 'parentId': 'A'
+                        }, 
+                      'children': [
+                        {'value': {
+                          'id': 'D', 'type': 'dir', 'parentId': 'B'
+                          },
+                          'children': [
+                            {'value': {
+                              'id': 'D.yaml', 'type': 'yaml', 'parentId': 'D'
+                              },
+                              'children': []
+                            }]},
+                            {'value': {
+                              'id': 'B.txt', 'type': 'txt', 'parentId': 'B'
+                            },
+                            'children': []}
+                        ]
+                      },
+                      {'value': {'id': 'A.txt', 'type': 'txt', 'parentId': 'A'},
+                      'children': []
+                      }
+                    ]
+                  }
 ```
 ### Visual Example 
 ![alt text](https://github.com/LVivona/TreeBuilder/blob/dc33393960b78355657d781890089b1da1b685a9/example.png)
